@@ -12,6 +12,9 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto">
+            <div th:if="${message}" class="alert alert-success text-center">
+                [[ ${message} ]]
+            </div>
             <div class="panel-body">
                 <table class="table">
                     <thead class="thead-dark">
@@ -24,8 +27,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="todo : ${todos}">
-                        <td th:text="${todo.id}">Employee ID</td>
-                        <td th:text="${todo.content}">Salary</td>
+                        <td th:text="${todo.id}"></td>
+                        <td th:text="${todo.content}"></td>
                         <td>
                             <a th:href="@{'/todos/edit/' + ${todo.id}}">Edit</a>
                         </td>
