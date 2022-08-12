@@ -2,7 +2,7 @@ package com.example.todos.controllers;
 
 
 import com.example.todos.entities.Todo;
-import com.example.todos.services.TodoNotFoundException;
+import com.example.todos.exceptions.TodoNotFoundException;
 import com.example.todos.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

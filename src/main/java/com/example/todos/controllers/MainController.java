@@ -8,6 +8,7 @@ public class MainController {
 
     @GetMapping("/")
     public String showHomePage() {
-        return "index";
+        return "redirect:/todos";
+//        return "index";
     }
 }

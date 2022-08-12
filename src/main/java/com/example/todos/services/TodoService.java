@@ -1,6 +1,7 @@
 package com.example.todos.services;
 
 import com.example.todos.entities.Todo;
+import com.example.todos.exceptions.TodoNotFoundException;
 import com.example.todos.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
