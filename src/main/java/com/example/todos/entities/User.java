@@ -1,7 +1,12 @@
 package com.example.todos.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -12,14 +17,14 @@ public class User {
     private String username;
     private String password;
 
-    public User() {
-    }
-
-    public User(Integer id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
+//    public User() {
+//    }
+//
+//    public User(Integer id, String username, String password) {
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//    }
 
     @Override
     public String toString() {

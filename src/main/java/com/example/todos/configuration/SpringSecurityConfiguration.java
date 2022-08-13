@@ -28,7 +28,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.
                 authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/").authenticated()
                 .antMatchers(loginPage).permitAll()
                 .antMatchers("/registration").permitAll()
 //                .antMatchers("/admin/**").hasAuthority("ADMIN")
@@ -37,7 +37,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 .formLogin()
                 .loginPage(loginPage)
-                .loginPage("/login")
                 .failureUrl("/login?error=true")
                 .defaultSuccessUrl("/")
                 .usernameParameter("username")

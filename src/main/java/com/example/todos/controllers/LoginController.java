@@ -3,11 +3,14 @@ package com.example.todos.controllers;
 import com.example.todos.entities.User;
 import com.example.todos.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
 
 @Controller
 public class LoginController {
@@ -16,7 +19,10 @@ public class LoginController {
     private UserService userService;
 
     @GetMapping(value = {"/login"})
-    public ModelAndView login() {
+    public ModelAndView login(Principal principal) {
+        if (principal != null && ((Authentication) principal).isAuthenticated()) {
+            return new ModelAndView("redirect:/todos");
+        }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
