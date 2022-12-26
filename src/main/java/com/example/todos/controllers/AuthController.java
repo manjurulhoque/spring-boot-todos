@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 
 @Controller
-public class LoginController {
+public class AuthController {
 
     @Autowired
     private UserService userService;
@@ -55,7 +55,6 @@ public class LoginController {
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("registration");
-
         }
         return modelAndView;
     }

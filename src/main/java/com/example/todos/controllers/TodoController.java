@@ -5,6 +5,7 @@ import com.example.todos.entities.Todo;
 import com.example.todos.exceptions.TodoNotFoundException;
 import com.example.todos.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

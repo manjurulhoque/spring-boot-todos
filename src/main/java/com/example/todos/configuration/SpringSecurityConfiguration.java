@@ -4,6 +4,7 @@ import com.example.todos.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -26,15 +28,17 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         String loginPage = "/login";
         String logoutPage = "/logout";
+        String registrationPage = "/registration";
 
         http.
                 authorizeRequests()
                 .antMatchers("/").authenticated()
                 .antMatchers(loginPage).permitAll()
-                .antMatchers("/registration").permitAll()
+                .antMatchers(registrationPage).permitAll()
+                .antMatchers("/**").permitAll()
 //                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .anyRequest()
-                .authenticated()
+//                .anyRequest()
+//                .authenticated()
                 .and().csrf().disable()
                 .formLogin()
                 .loginPage(loginPage)
@@ -49,15 +53,11 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+        web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 }
