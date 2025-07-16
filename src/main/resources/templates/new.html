@@ -16,6 +16,7 @@
                 <input type="hidden" th:field="*{id}">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Content" th:field="*{content}">
+                    <span class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
                 </div>
                 <input type="submit" value="Submit" class="btn btn-primary">
             </form>

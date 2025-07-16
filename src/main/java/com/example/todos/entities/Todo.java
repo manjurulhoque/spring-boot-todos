@@ -1,6 +1,7 @@
 package com.example.todos.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "todos")
@@ -10,6 +11,7 @@ public class Todo {
     private Integer id;
 
     @Column(nullable = false)
+    @NotBlank(message = "Content is required")
     private String content;
 
     public Integer getId() {
@@ -26,5 +28,13 @@ public class Todo {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

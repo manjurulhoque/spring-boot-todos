@@ -4,19 +4,24 @@ package com.example.todos.controllers;
 import com.example.todos.entities.Todo;
 import com.example.todos.exceptions.TodoNotFoundException;
 import com.example.todos.services.TodoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
 public class TodoController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TodoController.class);
     @Autowired private TodoService todoService;
 
     @GetMapping("/todos")
@@ -34,7 +39,11 @@ public class TodoController {
     }
 
     @PostMapping("/todos/save")
-    public String saveTodo(Todo todo, RedirectAttributes redirectAttributes) {
+    public String saveTodo(@Valid Todo todo, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if(bindingResult.hasErrors()) {
+            return "new";
+        }
+        LOGGER.info(todo.toString());
         todoService.save(todo);
 
         redirectAttributes.addFlashAttribute("message", "Todo successfully saved");
