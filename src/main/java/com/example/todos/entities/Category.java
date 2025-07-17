@@ -1,6 +1,6 @@
 package com.example.todos.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "categories")
@@ -23,7 +23,6 @@ public class Category {
         this.id = id;
     }
 
-    @Id
     public Integer getId() {
         return id;
     }
